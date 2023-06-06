@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/carsFragment">
+
+
+    <fragment
+        android:id="@+id/carsFragment"
+        android:name="com.example.rentcars.presentation.fragment.CarsFragment"
+        android:label="fragment_cars"
+        tools:layout="@layout/fragment_cars" >
+        <action
+            android:id="@+id/action_carsFragment_to_addAutoFragment"
+            app:destination="@id/addAutoFragment" />
+        <action
+            android:id="@+id/action_carsFragment_to_detailCarFragment"
+            app:destination="@id/detailCarFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.rentcars.presentation.fragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.rentcars.presentation.fragment.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
+    <fragment
+        android:id="@+id/addAutoFragment"
+        android:name="com.example.rentcars.presentation.fragment.AddAutoFragment"
+        android:label="fragment_add_auto"
+        tools:layout="@layout/fragment_add_auto" />
+    <fragment
+        android:id="@+id/detailCarFragment"
+        android:name="com.example.rentcars.presentation.fragment.DetailCarFragment"
+        android:label="fragment_detail_car"
+        tools:layout="@layout/fragment_detail_car" />
+</navigation>
