@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "212105504118",
+    "firebase_url": "https://carsharing-2040a-default-rtdb.firebaseio.com",
+    "project_id": "carsharing-2040a",
+    "storage_bucket": "carsharing-2040a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:212105504118:android:1f95ba5d4b0e13c4424657",
+        "android_client_info": {
+          "package_name": "com.example.rentcars"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "212105504118-cs0lusq2742ac34ruo1jasj2uu3e4ac1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdhfxHGvuIwA-7BgwTKlnwWYIBCxPWPvQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "212105504118-cs0lusq2742ac34ruo1jasj2uu3e4ac1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
