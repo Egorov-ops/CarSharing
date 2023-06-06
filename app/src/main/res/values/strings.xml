@@ -11,4 +11,5 @@
     <string name="region">Регион</string>
     <string name="save">Сохранить</string>
     <string name="add_auto">Добавить авто</string>
+    <string name="login">Войти</string>
 </resources>

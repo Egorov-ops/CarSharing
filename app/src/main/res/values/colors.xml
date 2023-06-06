@@ -16,4 +16,8 @@
     <color name="transparent">#00BB86FC</color>
     <color name="red">#8E1E1E</color>
 
+    <color name="process_cyan">#C0E8F9</color>
+    <color name="yimmin_blue">#274C77</color>
+    <color name="font_color">#121248</color>
+
 </resources>
