@@ -11,7 +11,6 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 
 
-
 suspend fun getCars(profileEntity: ProfileEntity, carEntity: CarEntity): List<CarEntity> {
     val db = Firebase.firestore
     val userId = profileEntity.id.toString()
@@ -38,71 +37,53 @@ suspend fun getCars(profileEntity: ProfileEntity, carEntity: CarEntity): List<Ca
     return carList
 }
 
-    fun addCars(carEntity: CarEntity) {
-        val db = Firebase.firestore
-        db.collection("Cars").document(carEntity.markAndModel).set(carEntity)
-            .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
-            .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
+fun addCars(carEntity: CarEntity) {
+    val db = Firebase.firestore
+    db.collection("Cars").document(carEntity.markAndModel).set(carEntity)
+        .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
+        .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
 
-    }
+}
 
-    fun deleteCar(carEntity: CarEntity) {
-        val db = Firebase.firestore
-        db.collection("Cars").document(carEntity.markAndModel).delete()
-            .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully deleted!") }
-            .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
-    }
+fun deleteCar(carEntity: CarEntity) {
+    val db = Firebase.firestore
+    db.collection("Cars").document(carEntity.markAndModel).delete()
+        .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully deleted!") }
+        .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
+}
 
-    fun editStateCar(carEntity: CarEntity, newState: CarEntity) {
-        val db = Firebase.firestore
-        db.collection("Cars").document(carEntity.state.toString())
-            .update(carEntity.state.toString(), newState)
-    }
+fun editStateCar(carEntity: CarEntity, newState: CarEntity) {
+    val db = Firebase.firestore
+    db.collection("Cars").document(carEntity.state.toString())
+        .update(carEntity.state.toString(), newState)
+}
 
-    fun editProfile(profileEntity: ProfileEntity, newName: String) {
-        /* Видимо с binding тягать данные будешь я хз как параметры их передавать , в комментах чтобы ошибок не было,
-         там допиши параметры передаваемые
-        потому что я хз что туда передать , написал как пример
-        */
-        val db = Firebase.firestore
-        db.collection("Users").document(profileEntity.name).update(profileEntity.name, newName)
-        //db.collection("Users").document(profileEntity.phone).update(profileEntity.phone)
-        //db.collection("Users").document(profileEntity.region).update(profileEntity.region)
-
-
-    }
-
-    fun createUser(email:String,password:String,name:String,phone:String,region:String){
-        val db = Firebase.firestore
-        val mAuth = Firebase.auth
-        mAuth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener() { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(ContentValues.TAG, "createUserWithEmail:success")
-                    val user = mAuth.currentUser
-
-                    val userForDb = user?.uid?.let { it2 ->
-                        ProfileEntity(
-                            it2,
-                            name,
-                            phone,
-                            region
-                        )
-                    }
+fun editProfile(profileEntity: ProfileEntity, newName: String) {
+    /* Видимо с binding тягать данные будешь я хз как параметры их передавать , в комментах чтобы ошибок не было,
+     там допиши параметры передаваемые
+    потому что я хз что туда передать , написал как пример
+    */
+    val db = Firebase.firestore
+    db.collection("Users").document(profileEntity.name).update(profileEntity.name, newName)
+    //db.collection("Users").document(profileEntity.phone).update(profileEntity.phone)
+    //db.collection("Users").document(profileEntity.region).update(profileEntity.region)
 
 
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)
+}
 
+fun getUserInfo(token: String) {
+    val db = Firebase.firestore
+    val user = db.collection("Users").document(token)
+    user.get().addOnSuccessListener { document ->
+        if (document != null && document.exists()) {
+            // Документ существует, получите данные пользователя
+            val userData = document.data
 
-                }
-            }
-    }
-
-
-
+            // Обработайте данные пользователя по вашему усмотрению
+            val name = userData?.get("name") as String
+            val phone = userData?.get("phone") as String
+            val region = userData?.get("region") as String
+}
 
 
 /*
