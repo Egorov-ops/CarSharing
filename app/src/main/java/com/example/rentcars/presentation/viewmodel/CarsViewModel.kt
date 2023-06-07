@@ -20,7 +20,7 @@ import javax.inject.Inject
 class CarsViewModel @Inject constructor(
     private val carsRepository: CarsRepository,
     private val userDataCredentials: UserDataCredentials
-): ViewModel() {
+) : ViewModel() {
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -78,6 +78,8 @@ class CarsViewModel @Inject constructor(
 //        }
 //    }
 
+    fun getToken(): String? = userDataCredentials.getToken()
+
     fun addCar(
         carEntity: CarEntity,
     ) {
@@ -85,7 +87,6 @@ class CarsViewModel @Inject constructor(
         carsRepository.addCar(carEntity)
         _isLoading.postValue(false)
     }
-
 
 
     fun deleteCar(

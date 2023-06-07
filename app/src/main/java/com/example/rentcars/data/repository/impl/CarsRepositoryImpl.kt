@@ -19,53 +19,7 @@ class CarsRepositoryImpl @Inject constructor(
     private val userDataCredentials: UserDataCredentials
 ) : CarsRepository {
 
-    private val cars: MutableList<CarEntity> = mutableListOf(
-        CarEntity(
-            1,
-            "Toyota Altezza",
-            TypeOfCar.NO_TRUCK,
-            region = "Asia/Japan",
-            state = StateOfCar.ON_REPAIR,
-            image = "https://a.d-cd.net/JIiHMbeYNwER5aQRQ-zt-9A1QLI-1920.jpg",
-            description = "Toyota Altezza - компактный заднеприводный автомобиль с элегантным дизайном, спортивной подвеской и надежным двигателем."
-        ),
-        CarEntity(
-            2,
-            "Audi A6",
-            TypeOfCar.NO_TRUCK,
-            region = "Europe/Germany",
-            state = StateOfCar.IN_FLIGHT,
-            image = "https://s0.rbk.ru/v6_top_pics/resized/1440xH/media/img/6/06/755773633153066.jpg",
-            description = "Audi A6 - престижный и комфортабельный автомобиль бизнес-класса с высоким уровнем отделки, технологичными системами и мощными двигателями."
-        ),
-        CarEntity(
-            3,
-            "Hyndai Smth",
-            TypeOfCar.TRUCK,
-            region = "Asia/Yekaterinburg",
-            state = StateOfCar.SOLD,
-            image = "https://www.autostat.ru/application/includes/blocks/big_photo/images/cache/000/098/048/22bd1f69-670-0.jpg?_=1637233323",
-            description = "Грузовики от Hyundai - надежные и эффективные транспортные средства, предлагающие просторные кабины, современные технологии и различные варианты грузоподъемности."
-        ),
-        CarEntity(
-            4,
-            "Lada Vesta",
-            TypeOfCar.NO_TRUCK,
-            region = "Asia/Chelyabinsk",
-            state = StateOfCar.ON_REPAIR,
-            image = "https://avtovesti.com/wp-content/uploads/2017/08/lada_vesta_40.jpeg",
-            description = "Lada Vesta - надежный и доступный автомобиль, предлагающий комфортабельный салон, экономичный двигатель и хорошую управляемость."
-        ),
-        CarEntity(
-            5,
-            "Subaru Impreza",
-            TypeOfCar.NO_TRUCK,
-            region = "Europe/Moscow",
-            state = StateOfCar.IN_FLIGHT,
-            image = "https://all-auto.org/wp-content/uploads/2020/10/Subaru-WRX-2-1.jpg",
-            description = "Subaru Impreza - спортивный и надежный автомобиль, известный своим высоким уровнем проходимости и управляемости. Он оснащен надежным полным приводом Symmetrical All-Wheel Drive, мощным двигателем и превосходной динамикой. Внутри просторный и комфортабельный салон с современными технологиями и высоким уровнем безопасности. Subaru Impreza - идеальный выбор для любителей адреналина и путешествий."
-        ),
-    )
+
 
     override suspend fun getCars(): ResultWrapper<List<CarEntity>> {
         return safeApiCall(Dispatchers.IO) {

@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -104,18 +105,22 @@ class AddAutoFragment : Fragment(R.layout.fragment_add_auto) {
                 binding.descriptionEt.error = "Поле обязательно"
                 binding.regionEt.error = "Поле обязательно"
             } else {
-                viewModel.addCar(
-                    carEntity = CarEntity(
-                        id = 1,
-                        markAndModel = binding.titleEt.text.toString(),
-                        typeOfCar = typeOfCar,
-                        description = binding.descriptionEt.text.toString(),
-                        region = binding.regionEt.text.toString(),
-                        state = StateOfCar.REST,
-                        image = imageUri
+                if(viewModel.getToken() != null){
+                    viewModel.addCar(
+                        carEntity = CarEntity(
+                            id = viewModel.getToken()!!,
+                            markAndModel = binding.titleEt.text.toString(),
+                            typeOfCar = typeOfCar,
+                            description = binding.descriptionEt.text.toString(),
+                            region = binding.regionEt.text.toString(),
+                            state = StateOfCar.REST,
+                            image = imageUri
+                        )
                     )
-                )
-                activity?.onBackPressedDispatcher?.onBackPressed()
+                    activity?.onBackPressedDispatcher?.onBackPressed()
+                }else{
+                    Toast.makeText(requireContext(), "Нет токена", Toast.LENGTH_LONG).show()
+                }
             }
         }
     }
