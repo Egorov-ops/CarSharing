@@ -6,11 +6,12 @@ import com.example.rentcars.data.entity.TypeOfCar
 import com.example.rentcars.data.repository.CarsRepository
 import com.example.rentcars.utils.ResultWrapper
 import com.example.rentcars.utils.safeApiCall
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
 class CarsRepositoryImpl @Inject constructor(
-
+    private val firestore: FirebaseFirestore
 ) : CarsRepository {
 
     private val cars: MutableList<CarEntity> = mutableListOf(

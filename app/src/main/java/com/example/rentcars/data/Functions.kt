@@ -4,15 +4,37 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import com.example.rentcars.data.entity.CarEntity
 import com.example.rentcars.data.entity.ProfileEntity
-import com.example.rentcars.data.entity.StateOfCar
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.tasks.await
 
 
-fun getCars(): List<CarEntity> {
+suspend fun getCars(profileId: Int): List<CarEntity> {
     val db = Firebase.firestore
+    val userId = profileId.toString()
 
-    return emptyList()
+    val carList = mutableListOf<CarEntity>()
+
+    val querySnapshot = db.collection("Cars")
+        .whereEqualTo("userId", userId)
+        .get()
+        .await() // Добавляем await(), чтобы дождаться завершения операции получения данных
+
+    for (documentSnapshot in querySnapshot.documents) {
+// Получите данные машины из документа
+       // val carData = documentSnapshot.data
+
+        // Преобразуйте carData в объект CarEntity
+        val carEntity = documentSnapshot.toObject(CarEntity::class.java)
+
+        // Добавьте carEntity в список carList
+        carEntity?.let {
+            carList.add(it)
+        }
+
+    }
+
+    return carList
 }
 
 fun addCars(carEntity: CarEntity) {
