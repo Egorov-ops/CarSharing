@@ -1,4 +1,4 @@
-package com.teamforce.thanksapp.presentation.fragment
+package com.example.rentcars.presentation.baseFragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,8 +9,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.rentcars.R
 import com.example.rentcars.databinding.FragmentMainFlowBinding
 import com.example.rentcars.presentation.baseFragments.BaseFlowFragment
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainFlowFragment : BaseFlowFragment(
     R.layout.fragment_main_flow, R.id.nav_host_fragment_main
 ) {

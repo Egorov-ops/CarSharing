@@ -40,6 +40,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         binding.editBtn.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
         }
+        binding.logoutBtn.setOnClickListener{
+            findNavController().navigate(
+                R.id.action_profileFragment_to_signFlowFragment2
+            )
+        }
     }
 
     private fun setProfileData() {

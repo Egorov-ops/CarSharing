@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.rentcars.R
 import com.example.rentcars.databinding.FragmentEditProfileBinding
@@ -54,6 +55,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
                 binding.regionEt.error = "Обязательное поле"
             }
         }
+
     }
 
     companion object {

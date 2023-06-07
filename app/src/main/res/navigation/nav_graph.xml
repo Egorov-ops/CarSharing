@@ -19,13 +19,13 @@
 
     <fragment
         android:id="@+id/mainFlowFragment"
-        android:name="com.teamforce.thanksapp.presentation.fragment.MainFlowFragment"
+        android:name="com.example.rentcars.presentation.baseFragments.MainFlowFragment"
         android:label="flow_fragment_main"
         tools:layout="@layout/fragment_main_flow" />
 
     <fragment
         android:id="@+id/signFlowFragment"
-        android:name="com.teamforce.thanksapp.presentation.fragment.auth.SignFlowFragment"
+        android:name="com.example.rentcars.presentation.baseFragments.SignFlowFragment"
         android:label="flow_fragment_sign"
         tools:layout="@layout/fragment_sign_flow" />
 

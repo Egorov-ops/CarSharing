@@ -10,22 +10,27 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.rentcars.databinding.FragmentSignInBinding
+import com.example.rentcars.presentation.viewmodel.CarsViewModel
 import com.example.rentcars.presentation.viewmodel.ProfileViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 class SignInFragment : Fragment() {
 
-    private lateinit var binding: FragmentSignInBinding
+    private val binding: FragmentSignInBinding by viewBinding()
     private lateinit var auth: FirebaseAuth
+    private lateinit var db:FirebaseFirestore
     private val viewModel:ProfileViewModel by activityViewModels()
+    private val carViewModel:CarsViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSignInBinding.inflate(layoutInflater)
+
         return inflater.inflate(R.layout.fragment_sign_in, container, false)
     }
 
@@ -43,10 +48,7 @@ class SignInFragment : Fragment() {
                         if (task.isSuccessful) {
                             Log.d(TAG, "signInWithEmail:success")
                             val user = auth.currentUser
-                            val token = viewModel.saveToken(user?.getIdToken(true).toString())
-                            findNavController().navigate(
-                                R.id.mainFlowFragment
-                            )
+
 
                         } else {
                             // If sign in fails, display a message to the user.
@@ -57,6 +59,16 @@ class SignInFragment : Fragment() {
                                 Toast.LENGTH_SHORT,
                             ).show()
 
+                        }
+                    }.addOnSuccessListener {
+                        val firebaseUser = it.user
+
+                        firebaseUser?.getIdToken(true)?.addOnSuccessListener { result ->
+                            val token = result.token
+                           viewModel.saveToken(token.toString())
+                            findNavController().navigate(
+                                R.id.action_signInFragment_to_mainFlowFragment2
+                            )
                         }
                     }
             }

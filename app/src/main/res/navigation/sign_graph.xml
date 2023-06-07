@@ -26,6 +26,6 @@
     </fragment>
     <fragment
         android:id="@+id/mainFlowFragment2"
-        android:name="com.teamforce.thanksapp.presentation.fragment.MainFlowFragment"
+        android:name="com.example.rentcars.presentation.baseFragments.MainFlowFragment"
         android:label="MainFlowFragment" />
 </navigation>

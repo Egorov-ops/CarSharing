@@ -1,6 +1,7 @@
 package com.example.rentcars.presentation.fragment
 
 import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -18,6 +19,9 @@ import com.example.rentcars.databinding.FragmentRegisterBinding
 import com.example.rentcars.presentation.viewmodel.CarsViewModel
 import com.example.rentcars.presentation.viewmodel.ProfileViewModel
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.InstallIn
 import javax.inject.Singleton
 
@@ -25,7 +29,8 @@ import javax.inject.Singleton
 class RegisterFragment : Fragment(R.layout.fragment_register) {
     private val binding: FragmentRegisterBinding by viewBinding()
     private lateinit var mAuth: FirebaseAuth
-    private val viewModel:ProfileViewModel by activityViewModels()
+
+    private val viewModel: ProfileViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -71,17 +76,18 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                             Log.d(ContentValues.TAG, "createUserWithEmail:success")
 
                             val user = mAuth.currentUser
-                            val userForDb = user?.uid?.let { it2 ->
-                                ProfileEntity(
-                                    it2,
-                                    name,
-                                    phone,
-                                    region
-                                )
-                                viewModel.saveToken(user.getIdToken(true).toString())
-                                findNavController().navigate(R.id.action_registerFragment_to_signInFragment)
-                            }
+                            val db = Firebase.firestore
+                           val dbRef= db.collection("Users").document(user?.uid.toString())
+                            val dbuser = hashMapOf(
+                                "id" to user?.uid.toString(),
+                                "name" to name,
+                                "phone" to phone,
+                                "region" to region
+                            )
+                            dbRef.set(dbuser)
 
+
+                            findNavController().navigate(R.id.action_registerFragment_to_signInFragment)
 
                         } else {
                             // If sign in fails, display a message to the user.

@@ -26,12 +26,17 @@
         <action
             android:id="@+id/action_profileFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_signFlowFragment2"
+            app:destination="@id/signFlowFragment2" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.example.rentcars.presentation.fragment.EditProfileFragment"
         android:label="fragment_edit_profile"
-        tools:layout="@layout/fragment_edit_profile" />
+        tools:layout="@layout/fragment_edit_profile" >
+
+    </fragment>
     <fragment
         android:id="@+id/addAutoFragment"
         android:name="com.example.rentcars.presentation.fragment.AddAutoFragment"
@@ -42,4 +47,8 @@
         android:name="com.example.rentcars.presentation.fragment.DetailCarFragment"
         android:label="fragment_detail_car"
         tools:layout="@layout/fragment_detail_car" />
+    <fragment
+        android:id="@+id/signFlowFragment2"
+        android:name="com.example.rentcars.presentation.baseFragments.SignFlowFragment"
+        android:label="SignFlowFragment" />
 </navigation>

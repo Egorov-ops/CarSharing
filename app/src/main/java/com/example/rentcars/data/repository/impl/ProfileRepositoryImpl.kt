@@ -11,7 +11,7 @@ class ProfileRepositoryImpl @Inject constructor() : ProfileRepository {
 
     var profileData = ProfileEntity(
         id = "1",
-        name = "Dmitry Malkov",
+        name = "Vlad Egorov",
         phone = "+79514462853",
         region = "Asia/Yekaterinburg"
     )

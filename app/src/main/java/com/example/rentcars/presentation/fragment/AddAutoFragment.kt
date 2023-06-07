@@ -33,6 +33,10 @@ import com.example.rentcars.utils.invisible
 import com.example.rentcars.utils.visible
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.transition.platform.MaterialContainerTransform
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -96,6 +100,8 @@ class AddAutoFragment : Fragment(R.layout.fragment_add_auto) {
             imageUri = null
         }
 
+        val user = FirebaseAuth.getInstance().currentUser
+        val userId = user?.uid
         binding.createBtn.setOnClickListener {
             if (binding.titleEt.text?.trim().isNullOrEmpty() ||
                 binding.regionEt.text?.trim().isNullOrEmpty() ||
@@ -108,7 +114,7 @@ class AddAutoFragment : Fragment(R.layout.fragment_add_auto) {
                 if(viewModel.getToken() != null){
                     viewModel.addCar(
                         carEntity = CarEntity(
-                            id = viewModel.getToken()!!,
+                            id = userId!!,
                             markAndModel = binding.titleEt.text.toString(),
                             typeOfCar = typeOfCar,
                             description = binding.descriptionEt.text.toString(),

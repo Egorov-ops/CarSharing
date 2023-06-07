@@ -17,7 +17,7 @@ suspend fun getCars(profileId: Int): List<CarEntity> {
     val carList = mutableListOf<CarEntity>()
 
     val querySnapshot = db.collection("Cars")
-        .whereEqualTo("userId", userId)
+        .whereEqualTo("id", userId)
         .get()
         .await() // Добавляем await(), чтобы дождаться завершения операции получения данных
 
