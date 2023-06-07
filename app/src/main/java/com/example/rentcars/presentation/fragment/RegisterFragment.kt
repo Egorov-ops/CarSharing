@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.rentcars.R
+import com.example.rentcars.data.entity.ProfileEntity
 import com.example.rentcars.databinding.FragmentRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.InstallIn
@@ -45,9 +46,11 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         }
 
         binding.btnRegister.setOnClickListener {
-            var email = binding.etEmail.text.toString()
-            var password = binding.etPassword.text.toString()
-
+            val email = binding.etEmail.text.toString()
+            val password = binding.etPassword.text.toString()
+            val name = binding.etName.text.toString()
+            val phone = binding.etPhone.text.toString()
+            val region = binding.etRegion.text.toString()
 
             if (TextUtils.isEmpty(email)) {
                 Toast.makeText(activity, "Введите email", Toast.LENGTH_LONG).show()
@@ -63,6 +66,14 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(ContentValues.TAG, "createUserWithEmail:success")
                             val user = mAuth.currentUser
+
+                            val userForDb = ProfileEntity(
+                                id,
+                                name,
+                                phone,
+                                region
+                            )
+
 
                         } else {
                             // If sign in fails, display a message to the user.
