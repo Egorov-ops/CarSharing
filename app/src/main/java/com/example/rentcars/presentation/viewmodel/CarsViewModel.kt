@@ -34,13 +34,11 @@ class CarsViewModel @Inject constructor(
     fun saveToken(token: String) = userDataCredentials.saveToken(token)
 
 
-    fun getCars(
-        profileId: Int
-    ) {
+    fun getCars() {
         _isLoading.postValue(true)
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                when (val result = carsRepository.getCars(profileId)) {
+                when (val result = carsRepository.getCars()) {
                     is ResultWrapper.Success -> {
                         _cars.postValue(result.value)
                     }
@@ -57,28 +55,28 @@ class CarsViewModel @Inject constructor(
         }
     }
 
-    fun getCar(
-        id: Int
-    ) {
-        _isLoading.postValue(true)
-        viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                when (val result = carsRepository.getCar(id)) {
-                    is ResultWrapper.Success -> {
-                        _detailOfCar.postValue(result.value)
-                    }
-                    else -> {
-                        if (result is ResultWrapper.GenericError) {
-
-
-                        } else if (result is ResultWrapper.NetworkError) {
-                        }
-                    }
-                }
-                _isLoading.postValue(false)
-            }
-        }
-    }
+//    fun getCar(
+//        id: Int
+//    ) {
+//        _isLoading.postValue(true)
+//        viewModelScope.launch {
+//            withContext(Dispatchers.IO) {
+//                when (val result = carsRepository.getCar(id)) {
+//                    is ResultWrapper.Success -> {
+//                        _detailOfCar.postValue(result.value)
+//                    }
+//                    else -> {
+//                        if (result is ResultWrapper.GenericError) {
+//
+//
+//                        } else if (result is ResultWrapper.NetworkError) {
+//                        }
+//                    }
+//                }
+//                _isLoading.postValue(false)
+//            }
+//        }
+//    }
 
     fun addCar(
         carEntity: CarEntity,

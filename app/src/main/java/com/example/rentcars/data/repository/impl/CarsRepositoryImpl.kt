@@ -2,6 +2,7 @@ package com.example.rentcars.data.repository.impl
 
 import android.content.ContentValues
 import android.util.Log
+import com.example.rentcars.data.UserDataCredentials
 import com.example.rentcars.data.entity.CarEntity
 import com.example.rentcars.data.entity.StateOfCar
 import com.example.rentcars.data.entity.TypeOfCar
@@ -14,7 +15,8 @@ import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class CarsRepositoryImpl @Inject constructor(
-    private val firestore: FirebaseFirestore
+    private val firestore: FirebaseFirestore,
+    private val userDataCredentials: UserDataCredentials
 ) : CarsRepository {
 
     private val cars: MutableList<CarEntity> = mutableListOf(
@@ -65,9 +67,9 @@ class CarsRepositoryImpl @Inject constructor(
         ),
     )
 
-    override suspend fun getCars(profileId: Int): ResultWrapper<List<CarEntity>> {
+    override suspend fun getCars(): ResultWrapper<List<CarEntity>> {
         return safeApiCall(Dispatchers.IO) {
-            val userId = profileId.toString()
+            val userId = userDataCredentials.getToken().toString()
 
             val carList = mutableListOf<CarEntity>()
 
@@ -94,11 +96,11 @@ class CarsRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getCar(id: Int): ResultWrapper<CarEntity> {
-        return safeApiCall(Dispatchers.IO) {
-            cars.find { carEntity -> carEntity.id == id } ?: cars.first()
-        }
-    }
+//    override suspend fun getCar(id: Int): ResultWrapper<CarEntity> {
+//        return safeApiCall(Dispatchers.IO) {
+//            cars.find { carEntity -> carEntity.id == id } ?: cars.first()
+//        }
+//    }
 
     override fun addCar(
         carEntity: CarEntity

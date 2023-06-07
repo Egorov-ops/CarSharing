@@ -7,8 +7,8 @@ import com.example.rentcars.utils.ResultWrapper
 
 interface CarsRepository {
 
-    suspend fun getCars(profileId: Int): ResultWrapper<List<CarEntity>>
-    suspend fun getCar(id: Int): ResultWrapper<CarEntity>
+    suspend fun getCars(): ResultWrapper<List<CarEntity>>
+//    suspend fun getCar(id: Int): ResultWrapper<CarEntity>
 
     fun addCar(carEntity: CarEntity)
 

@@ -35,7 +35,7 @@ class DetailCarFragment : Fragment(R.layout.fragment_detail_car) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        carId?.let { viewModel.getCar(it) }
+       // carId?.let { viewModel.getCar(it) }
         viewModel.detailOfCar.observe(viewLifecycleOwner){
             if(it != null){
                 binding.markTv.text = it.markAndModel
