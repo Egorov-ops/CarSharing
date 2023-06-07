@@ -67,12 +67,14 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                             Log.d(ContentValues.TAG, "createUserWithEmail:success")
                             val user = mAuth.currentUser
 
-                            val userForDb = ProfileEntity(
-                                id,
-                                name,
-                                phone,
-                                region
-                            )
+                            val userForDb = user?.uid?.let { it2 ->
+                                ProfileEntity(
+                                    it2,
+                                    name,
+                                    phone,
+                                    region
+                                )
+                            }
 
 
                         } else {

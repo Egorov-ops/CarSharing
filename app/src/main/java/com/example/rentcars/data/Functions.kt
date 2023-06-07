@@ -1,18 +1,15 @@
 package com.example.rentcars.data
 
+import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.util.Log
 import com.example.rentcars.data.entity.CarEntity
 import com.example.rentcars.data.entity.ProfileEntity
-import com.example.rentcars.data.entity.StateOfCar
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
 import kotlinx.coroutines.tasks.await
-import javax.inject.Singleton
+
 
 
 suspend fun getCars(profileEntity: ProfileEntity, carEntity: CarEntity): List<CarEntity> {
@@ -73,6 +70,35 @@ suspend fun getCars(profileEntity: ProfileEntity, carEntity: CarEntity): List<Ca
         //db.collection("Users").document(profileEntity.region).update(profileEntity.region)
 
 
+    }
+
+    fun createUser(email:String,password:String,name:String,phone:String,region:String){
+        val db = Firebase.firestore
+        val mAuth = Firebase.auth
+        mAuth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener() { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(ContentValues.TAG, "createUserWithEmail:success")
+                    val user = mAuth.currentUser
+
+                    val userForDb = user?.uid?.let { it2 ->
+                        ProfileEntity(
+                            it2,
+                            name,
+                            phone,
+                            region
+                        )
+                    }
+
+
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)
+
+
+                }
+            }
     }
 
 
