@@ -82,7 +82,7 @@
         android:layout_gravity="center"
         android:backgroundTint="@color/yimmin_blue"
         android:fontFamily="@font/bad_comic"
-        android:text="@string/register"
+
         android:textSize="20sp"
         android:topLeftRadius="10dp"
         android:topRightRadius="10dp" />
@@ -94,7 +94,6 @@
         android:layout_gravity="center"
         android:layout_margin="20dp"
         android:padding="10dp"
-        android:text="@string/have_account"
         android:textColor="@color/font_color"
         android:textSize="20sp"
         android:textStyle="bold" />

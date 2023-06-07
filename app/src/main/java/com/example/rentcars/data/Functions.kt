@@ -5,7 +5,6 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import com.example.rentcars.data.entity.CarEntity
 import com.example.rentcars.data.entity.ProfileEntity
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await

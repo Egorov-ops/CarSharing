@@ -31,7 +31,7 @@ class ProfileViewModel @Inject constructor(
         _isLoading.postValue(true)
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                when (val result = profileRepository.getProfile(profileId)) {
+                when (val result = profileRepository.getProfile(profileId.toString())) {
                     is ResultWrapper.Success -> {
                         _profile.postValue(result.value)
                     }
@@ -59,7 +59,7 @@ class ProfileViewModel @Inject constructor(
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 when (val result = profileRepository.updateProfile(
-                    profileId, name, phone, email, region
+                    profileId.toString(), name, phone, region
                 )){}
                 _isLoading.postValue(false)
             }

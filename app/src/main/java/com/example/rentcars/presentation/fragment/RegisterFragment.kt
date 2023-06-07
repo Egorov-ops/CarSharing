@@ -40,7 +40,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         binding.tvLogin.setOnClickListener() {
 
             findNavController().navigate(
-                R.id.action_registerFragment_to_mainFlowFragment
+                R.id.action_registerFragment_to_signInFragment
             )
 
         }
@@ -74,6 +74,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                                     phone,
                                     region
                                 )
+                                findNavController().navigate(R.id.action_registerFragment_to_signInFragment)
                             }
 
 

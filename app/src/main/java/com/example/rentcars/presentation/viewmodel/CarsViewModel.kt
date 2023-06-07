@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.rentcars.data.UserDataCredentials
 import com.example.rentcars.data.entity.CarEntity
 import com.example.rentcars.data.entity.StateOfCar
 import com.example.rentcars.data.entity.TypeOfCar
@@ -17,7 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CarsViewModel @Inject constructor(
-    private val carsRepository: CarsRepository
+    private val carsRepository: CarsRepository,
+    private val userDataCredentials: UserDataCredentials
 ): ViewModel() {
 
     private val _isLoading = MutableLiveData<Boolean>()
@@ -28,6 +30,8 @@ class CarsViewModel @Inject constructor(
 
     private val _detailOfCar = MutableLiveData<CarEntity?>()
     val detailOfCar: LiveData<CarEntity?> = _detailOfCar
+
+    fun saveToken(token: String) = userDataCredentials.saveToken(token)
 
 
     fun getCars(

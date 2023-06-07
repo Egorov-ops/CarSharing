@@ -46,7 +46,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         viewModel.profile.observe(viewLifecycleOwner){ profile ->
             if(profile != null){
                 binding.nameTv.text = profile.name
-                binding.emailTv.text = profile.email
                 binding.phoneTv.text = profile.phone
                 binding.gpsTv.text = profile.region
             }
