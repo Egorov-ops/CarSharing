@@ -16,7 +16,7 @@ import com.example.rentcars.utils.setImage
 
 
 class CarAdapter(
-    val onCarClicked: (carId: Int) -> Unit
+    val onCarClicked: (carId: String) -> Unit
 ) : ListAdapter<CarEntity, CarAdapter.CarViewHolder>(DiffCallback) {
 
     companion object{
@@ -49,7 +49,6 @@ class CarAdapter(
         val item = currentList[position]
         holder.binding.apply {
             markTv.text = item.markAndModel
-            // По хорошему это надо делать в маппере и подключать в domain слое, а мы сейчас в слое view(presentation)
             typeTv.text = CarMapper.mapTypeOfCar(item.typeOfCar)
             stateTv.text = CarMapper.mapStateOfCar(item.state)
             imageIv.setImage(item.image)
@@ -58,23 +57,6 @@ class CarAdapter(
             }
         }
 
-    }
-
-
-    private fun mapTypeOfCar(typeOfCar: TypeOfCar): String {
-        return when(typeOfCar){
-            TypeOfCar.TRUCK -> "Грузовой"
-            TypeOfCar.NO_TRUCK -> "Легковой"
-        }
-    }
-
-    private fun mapStateOfCar(stateOfCar: StateOfCar): String {
-        return when(stateOfCar){
-            StateOfCar.IN_FLIGHT -> "В рейсе"
-            StateOfCar.ON_REPAIR -> "На ремонте"
-            StateOfCar.SOLD -> "Продано"
-            StateOfCar.REST -> "Простаивает"
-        }
     }
 
     override fun getItemCount(): Int {
