@@ -23,6 +23,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.rentcars.R
+import com.example.rentcars.data.entity.CarEntity
 import com.example.rentcars.data.entity.StateOfCar
 import com.example.rentcars.data.entity.TypeOfCar
 import com.example.rentcars.databinding.FragmentAddAutoBinding
@@ -103,14 +104,17 @@ class AddAutoFragment : Fragment(R.layout.fragment_add_auto) {
                 binding.descriptionEt.error = "Поле обязательно"
                 binding.regionEt.error = "Поле обязательно"
             } else {
-//                viewModel.addCar(
-//                    markAndModel = binding.titleEt.text.toString(),
-//                    typeOfCar = typeOfCar,
-//                    description = binding.descriptionEt.text.toString(),
-//                    region = binding.regionEt.text.toString(),
-//                    state = StateOfCar.REST,
-//                    image = imageUri
-//                )
+                viewModel.addCar(
+                    carEntity = CarEntity(
+                        id = 1,
+                        markAndModel = binding.titleEt.text.toString(),
+                        typeOfCar = typeOfCar,
+                        description = binding.descriptionEt.text.toString(),
+                        region = binding.regionEt.text.toString(),
+                        state = StateOfCar.REST,
+                        image = imageUri
+                    )
+                )
                 activity?.onBackPressedDispatcher?.onBackPressed()
             }
         }
