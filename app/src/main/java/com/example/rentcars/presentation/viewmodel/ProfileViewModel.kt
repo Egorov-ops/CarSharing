@@ -26,6 +26,7 @@ class ProfileViewModel @Inject constructor(
     private val _profile = MutableLiveData<ProfileEntity?>()
     val profile: LiveData<ProfileEntity?> = _profile
 
+    fun saveToken(token: String) = userDataCredentials.saveToken(token)
     fun getToken(): String? = userDataCredentials.getToken()
 
 

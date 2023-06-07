@@ -9,11 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.rentcars.R
 import com.example.rentcars.data.entity.ProfileEntity
 import com.example.rentcars.databinding.FragmentRegisterBinding
+import com.example.rentcars.presentation.viewmodel.CarsViewModel
+import com.example.rentcars.presentation.viewmodel.ProfileViewModel
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.InstallIn
 import javax.inject.Singleton
@@ -22,6 +25,7 @@ import javax.inject.Singleton
 class RegisterFragment : Fragment(R.layout.fragment_register) {
     private val binding: FragmentRegisterBinding by viewBinding()
     private lateinit var mAuth: FirebaseAuth
+    private val viewModel:ProfileViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -65,8 +69,8 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                         if (task.isSuccessful) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(ContentValues.TAG, "createUserWithEmail:success")
-                            val user = mAuth.currentUser
 
+                            val user = mAuth.currentUser
                             val userForDb = user?.uid?.let { it2 ->
                                 ProfileEntity(
                                     it2,
@@ -74,6 +78,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                                     phone,
                                     region
                                 )
+                                viewModel.saveToken(user.getIdToken(true).toString())
                                 findNavController().navigate(R.id.action_registerFragment_to_signInFragment)
                             }
 
