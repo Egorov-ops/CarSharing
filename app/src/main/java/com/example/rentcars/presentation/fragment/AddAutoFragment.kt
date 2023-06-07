@@ -114,7 +114,7 @@ class AddAutoFragment : Fragment(R.layout.fragment_add_auto) {
                 if(viewModel.getToken() != null){
                     viewModel.addCar(
                         carEntity = CarEntity(
-                            id = userId!!,
+                            id = viewModel.getToken()!!,
                             markAndModel = binding.titleEt.text.toString(),
                             typeOfCar = typeOfCar,
                             description = binding.descriptionEt.text.toString(),

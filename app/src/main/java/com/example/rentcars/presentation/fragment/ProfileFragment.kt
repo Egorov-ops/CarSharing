@@ -14,6 +14,9 @@ import com.example.rentcars.databinding.FragmentProfileBinding
 import com.example.rentcars.presentation.viewmodel.ProfileViewModel
 import com.example.rentcars.utils.invisible
 import com.example.rentcars.utils.visible
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -57,9 +60,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             }
         }
     }
+    private val currentUser = Firebase.auth.currentUser?.uid
 
     private fun loadProfileData() {
-        viewModel.getProfile(1)
+        viewModel.getProfile(currentUser!!)
     }
 
     private fun expandingInfoCard(){

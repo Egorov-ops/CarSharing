@@ -77,15 +77,22 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
                             val user = mAuth.currentUser
                             val db = Firebase.firestore
-                           val dbRef= db.collection("Users").document(user?.uid.toString())
-                            val dbuser = hashMapOf(
-                                "id" to user?.uid.toString(),
-                                "name" to name,
-                                "phone" to phone,
-                                "region" to region
-                            )
-                            dbRef.set(dbuser)
 
+                            user?.getIdToken(true)
+                                ?.addOnSuccessListener { tokenResult ->
+                                    val token = tokenResult.token
+
+
+                                    val dbRef = db.collection("Users").document(user.uid)
+                                    val dbuser = hashMapOf(
+                                        "token" to token,
+                                        "uId" to user.uid,
+                                        "name" to name,
+                                        "phone" to phone,
+                                        "region" to region
+                                    )
+                                    dbRef.set(dbuser)
+                                }
 
                             findNavController().navigate(R.id.action_registerFragment_to_signInFragment)
 

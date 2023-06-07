@@ -9,9 +9,7 @@ import com.example.rentcars.data.entity.TypeOfCar
 import com.example.rentcars.data.repository.CarsRepository
 import com.example.rentcars.utils.ResultWrapper
 import com.example.rentcars.utils.safeApiCall
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -25,7 +23,7 @@ class CarsRepositoryImpl @Inject constructor(
 
     override suspend fun getCars(): ResultWrapper<List<CarEntity>> {
         return safeApiCall(Dispatchers.IO) {
-            val userId = FirebaseAuth.getInstance().currentUser?.uid
+            val userId = userDataCredentials.getToken().toString()
 
             val carList = mutableListOf<CarEntity>()
 

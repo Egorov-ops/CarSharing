@@ -62,7 +62,6 @@ class SignInFragment : Fragment() {
                         }
                     }.addOnSuccessListener {
                         val firebaseUser = it.user
-
                         firebaseUser?.getIdToken(true)?.addOnSuccessListener { result ->
                             val token = result.token
                            viewModel.saveToken(token.toString())

@@ -31,7 +31,7 @@ class ProfileViewModel @Inject constructor(
 
 
     fun getProfile(
-        profileId: Int
+        profileId: String
     ) {
         _isLoading.postValue(true)
         viewModelScope.launch {
