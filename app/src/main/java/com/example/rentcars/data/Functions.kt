@@ -71,10 +71,10 @@ fun editProfile(profileEntity: ProfileEntity, newName: String) {
 
 }
 
-fun getUserInfo(token: String) {
+fun getUserInfo(token: String, callback: (ProfileEntity?) -> Unit) {
     val db = Firebase.firestore
-    val user = db.collection("Users").document(token)
-    user.get().addOnSuccessListener { document ->
+    val userRef = db.collection("Users").document(token)
+    userRef.get().addOnSuccessListener { document ->
         if (document != null && document.exists()) {
             // Документ существует, получите данные пользователя
             val userData = document.data
@@ -83,6 +83,16 @@ fun getUserInfo(token: String) {
             val name = userData?.get("name") as String
             val phone = userData?.get("phone") as String
             val region = userData?.get("region") as String
+
+            val userInfo = ProfileEntity(token, name, phone, region)
+            callback(userInfo)
+        } else {
+            callback(null) // Возвращаем null в случае, если документ не существует
+        }
+    }.addOnFailureListener { exception ->
+        // Обработка ошибок при получении данных
+        callback(null) // Возвращаем null в случае ошибки
+    }
 }
 
 
