@@ -49,9 +49,19 @@ fun editProfile(profileEntity: ProfileEntity,newName:String) {
 }
 
 
+
 /*
+@InstallIn(Singleton::class)
+@Module
+object firebaseModule(){
+    @Provides
+    @Singleton
+    fun provideFirestoreInstance():FirebaseFirestore{
+        return FirebaseFirestore.getInstance()
+    }
+}
+
+*/
 
 
 
-
- */
