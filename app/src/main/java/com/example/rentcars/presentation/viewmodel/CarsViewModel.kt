@@ -31,11 +31,12 @@ class CarsViewModel @Inject constructor(
 
 
     fun getCars(
+        profileId: Int
     ) {
         _isLoading.postValue(true)
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                when (val result = carsRepository.getCars()) {
+                when (val result = carsRepository.getCars(profileId)) {
                     is ResultWrapper.Success -> {
                         _cars.postValue(result.value)
                     }
@@ -76,34 +77,29 @@ class CarsViewModel @Inject constructor(
     }
 
     fun addCar(
-        markAndModel: String,
-        typeOfCar: TypeOfCar,
-        description: String,
-        region: String,
-        state: StateOfCar,
-        image: String?
+        carEntity: CarEntity,
     ) {
         _isLoading.postValue(true)
-        carsRepository.addCar(markAndModel, description, typeOfCar, region, state, image)
+        carsRepository.addCar(carEntity)
         _isLoading.postValue(false)
     }
 
 
 
     fun deleteCar(
-        id: Int,
+        carEntity: CarEntity,
     ) {
         _isLoading.postValue(true)
-        carsRepository.deleteCar(id)
+        carsRepository.deleteCar(carEntity)
         _isLoading.postValue(false)
     }
 
     fun updateStateCar(
-        id: Int,
-        state: StateOfCar
+        oldStateOfCar: StateOfCar,
+        newStateOfCar: StateOfCar
     ) {
         _isLoading.postValue(true)
-        carsRepository.changeStateCar(id, state)
+        carsRepository.changeStateCar(oldStateOfCar, newStateOfCar)
         _isLoading.postValue(false)
     }
 

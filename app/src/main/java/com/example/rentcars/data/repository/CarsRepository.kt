@@ -7,24 +7,15 @@ import com.example.rentcars.utils.ResultWrapper
 
 interface CarsRepository {
 
-    suspend fun getCars(): ResultWrapper<List<CarEntity>>
+    suspend fun getCars(profileId: Int): ResultWrapper<List<CarEntity>>
     suspend fun getCar(id: Int): ResultWrapper<CarEntity>
 
-    fun addCar(
-        markAndModel: String,
-        description: String,
-        typeOfCar: TypeOfCar,
-        region: String,
-        state: StateOfCar,
-        image: String?
-    )
+    fun addCar(carEntity: CarEntity)
 
-    fun deleteCar(
-        id: Int,
-    )
+    fun deleteCar(carEntity: CarEntity)
 
     fun changeStateCar(
-        id: Int,
-        newState: StateOfCar
+        oldStateOfCar: StateOfCar,
+        newStateOfCar: StateOfCar
     )
 }

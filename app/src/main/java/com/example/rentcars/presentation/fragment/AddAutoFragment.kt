@@ -103,14 +103,14 @@ class AddAutoFragment : Fragment(R.layout.fragment_add_auto) {
                 binding.descriptionEt.error = "Поле обязательно"
                 binding.regionEt.error = "Поле обязательно"
             } else {
-                viewModel.addCar(
-                    markAndModel = binding.titleEt.text.toString(),
-                    typeOfCar = typeOfCar,
-                    description = binding.descriptionEt.text.toString(),
-                    region = binding.regionEt.text.toString(),
-                    state = StateOfCar.REST,
-                    image = imageUri
-                )
+//                viewModel.addCar(
+//                    markAndModel = binding.titleEt.text.toString(),
+//                    typeOfCar = typeOfCar,
+//                    description = binding.descriptionEt.text.toString(),
+//                    region = binding.regionEt.text.toString(),
+//                    state = StateOfCar.REST,
+//                    image = imageUri
+//                )
                 activity?.onBackPressedDispatcher?.onBackPressed()
             }
         }

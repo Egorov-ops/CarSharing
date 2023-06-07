@@ -36,7 +36,9 @@ class CarsFragment : Fragment(R.layout.fragment_cars) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getCars()
+        // TODO Прокинуть настоящий Id
+        val profileId = 1
+        viewModel.getCars(profileId)
         val listAdapter = CarAdapter(::onCarClicked)
         binding.list.apply {
             adapter = listAdapter
@@ -50,7 +52,7 @@ class CarsFragment : Fragment(R.layout.fragment_cars) {
 
 
         binding.refreshLayout.setOnRefreshListener {
-            viewModel.getCars()
+            viewModel.getCars(profileId)
         }
 
         binding.addAutoBtn.setOnClickListener {

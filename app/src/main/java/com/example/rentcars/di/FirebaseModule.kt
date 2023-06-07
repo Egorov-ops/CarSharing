@@ -1,14 +1,15 @@
 package com.example.rentcars.di
 
+import android.app.Application
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-
-@InstallIn(Singleton::class)
 @Module
+@InstallIn(SingletonComponent::class)
 class FirebaseModule{
     @Provides
     @Singleton
