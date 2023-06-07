@@ -6,13 +6,12 @@ import com.example.rentcars.utils.ResultWrapper
 interface ProfileRepository {
 
     //
-    suspend fun getProfile(profileId: Int): ResultWrapper<ProfileEntity>
+    suspend fun getProfile(profileId: String): ResultWrapper<ProfileEntity>
 
     suspend fun updateProfile(
-        profileId: Int,
+        profileId: String,
         name: String,
         phone: String,
-        email: String,
         region: String
     )
 }

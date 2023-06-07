@@ -10,29 +10,27 @@ import javax.inject.Inject
 class ProfileRepositoryImpl @Inject constructor() : ProfileRepository {
 
     var profileData = ProfileEntity(
-        id = 1,
+        id = "1",
         name = "Dmitry Malkov",
-        email = "mde.developer@gmail.com",
         phone = "+79514462853",
         region = "Asia/Yekaterinburg"
     )
 
-    override suspend fun getProfile(profileId: Int): ResultWrapper<ProfileEntity> {
+    override suspend fun getProfile(profileId: String): ResultWrapper<ProfileEntity> {
         return safeApiCall(Dispatchers.IO) {
             profileData
         }
     }
 
     override suspend fun updateProfile(
-        profileId: Int,
+        profileId: String,
         name: String,
         phone: String,
-        email: String,
         region: String
     ) {
         profileData = ProfileEntity(
             id = profileId,
-            name, email, phone, region
+            name,  phone, region
         )
     }
 }

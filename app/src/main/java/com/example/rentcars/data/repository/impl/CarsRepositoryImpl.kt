@@ -51,7 +51,7 @@ class CarsRepositoryImpl @Inject constructor(
             TypeOfCar.NO_TRUCK,
             region = "Asia/Chelyabinsk",
             state = StateOfCar.ON_REPAIR,
-            image = "https://sun9-58.userapi.com/impg/rXQxxJVgqg8qR5J12WvKEjTXBIEZwmdJ-RlWeA/slfZgjJvskU.jpg?size=1434x2160&quality=96&sign=522cbb0109bc44556be857d61ff4e623&type=album",
+            image = "https://avtovesti.com/wp-content/uploads/2017/08/lada_vesta_40.jpeg",
             description = "Lada Vesta - надежный и доступный автомобиль, предлагающий комфортабельный салон, экономичный двигатель и хорошую управляемость."
         ),
         CarEntity(
