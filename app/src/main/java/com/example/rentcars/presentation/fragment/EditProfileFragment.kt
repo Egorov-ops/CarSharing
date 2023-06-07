@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.rentcars.R
@@ -34,15 +35,18 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
                 binding.phoneEt.text?.trim()?.isNotEmpty() == true &&
                 binding.emailEt.text?.trim()?.isNotEmpty() == true &&
                 binding.regionEt.text?.trim()?.isNotEmpty() == true){
+                if(viewModel.getToken() != null){
+                    viewModel.updateProfile(
+                        profileId = viewModel.getToken()!!,
+                        name = binding.nameEt.text.toString(),
+                        phone = binding.phoneEt.text.toString(),
+                        region = binding.regionEt.text.toString()
+                    )
+                    activity?.onBackPressedDispatcher?.onBackPressed()
+                }else{
+                    Toast.makeText(requireContext(), "Нет токена", Toast.LENGTH_LONG).show()
+                }
 
-                viewModel.updateProfile(
-                    profileId = 1,
-                    name = binding.nameEt.text.toString(),
-                    phone = binding.phoneEt.text.toString(),
-                    email = binding.emailEt.text.toString(),
-                    region = binding.regionEt.text.toString()
-                )
-                activity?.onBackPressedDispatcher?.onBackPressed()
             }else{
                 binding.nameEt.error = "Обязательное поле"
                 binding.phoneEt.error = "Обязательное поле"

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.rentcars.data.UserDataCredentials
 import com.example.rentcars.data.entity.ProfileEntity
 import com.example.rentcars.data.repository.ProfileRepository
 import com.example.rentcars.utils.ResultWrapper
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val profileRepository: ProfileRepository
+    private val profileRepository: ProfileRepository,
+    private val userDataCredentials: UserDataCredentials
 ): ViewModel() {
 
     private val _isLoading = MutableLiveData<Boolean>()
@@ -23,6 +25,8 @@ class ProfileViewModel @Inject constructor(
 
     private val _profile = MutableLiveData<ProfileEntity?>()
     val profile: LiveData<ProfileEntity?> = _profile
+
+    fun getToken(): String? = userDataCredentials.getToken()
 
 
     fun getProfile(
@@ -49,10 +53,9 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun updateProfile(
-        profileId: Int,
+        profileId: String,
         name: String,
         phone: String,
-        email: String,
         region: String
     ) {
         _isLoading.postValue(true)
