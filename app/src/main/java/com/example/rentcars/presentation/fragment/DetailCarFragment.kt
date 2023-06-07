@@ -12,6 +12,7 @@ import com.example.rentcars.data.entity.StateOfCar
 import com.example.rentcars.databinding.FragmentDetailCarBinding
 import com.example.rentcars.presentation.CarMapper
 import com.example.rentcars.presentation.viewmodel.CarsViewModel
+import com.example.rentcars.utils.Consts.CAR_ENTITY
 import com.example.rentcars.utils.getParcelableExt
 import com.example.rentcars.utils.setImage
 
@@ -92,8 +93,6 @@ class DetailCarFragment : Fragment(R.layout.fragment_detail_car) {
 
 
     companion object {
-
-        const val CAR_ENTITY = "carEntity"
 
         @JvmStatic
         fun newInstance() =

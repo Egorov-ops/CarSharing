@@ -16,7 +16,7 @@ import com.example.rentcars.utils.setImage
 
 
 class CarAdapter(
-    val onCarClicked: (carId: String) -> Unit
+    val onCarClicked: (carEntity: CarEntity) -> Unit
 ) : ListAdapter<CarEntity, CarAdapter.CarViewHolder>(DiffCallback) {
 
     companion object{
@@ -53,7 +53,7 @@ class CarAdapter(
             stateTv.text = CarMapper.mapStateOfCar(item.state)
             imageIv.setImage(item.image)
             root.setOnClickListener {
-                onCarClicked.invoke(item.id)
+                onCarClicked.invoke(item)
             }
         }
 
