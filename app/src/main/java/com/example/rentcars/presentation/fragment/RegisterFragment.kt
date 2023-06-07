@@ -14,6 +14,8 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.rentcars.R
 import com.example.rentcars.databinding.FragmentRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.InstallIn
+import javax.inject.Singleton
 
 
 class RegisterFragment : Fragment(R.layout.fragment_register) {

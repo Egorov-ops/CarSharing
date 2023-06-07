@@ -5,9 +5,14 @@ import android.util.Log
 import com.example.rentcars.data.entity.CarEntity
 import com.example.rentcars.data.entity.ProfileEntity
 import com.example.rentcars.data.entity.StateOfCar
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
 import kotlinx.coroutines.tasks.await
+import javax.inject.Singleton
 
 
 suspend fun getCars(profileEntity: ProfileEntity, carEntity: CarEntity): List<CarEntity> {
@@ -69,13 +74,22 @@ suspend fun getCars(profileEntity: ProfileEntity, carEntity: CarEntity): List<Ca
 
 
     }
+
+
+
+
+
 /*
+@InstallIn(Singleton::class)
+@Module
+object firebaseModule(){
+    @Provides
+    @Singleton
+    fun provideFirestoreInstance():FirebaseFirestore{
+        return FirebaseFirestore.getInstance()
+    }
+}
+
+*/
 
 
-
-/*
-
-
-
-
- */
